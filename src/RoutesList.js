@@ -1,9 +1,18 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Homepage from "./Hompage";
 import CompanyList from "./CompanyList";
-import CompanyDetails from "./CompanyDetail";
+import CompanyDetail from "./CompanyDetail";
 import JobList from "./JobList";
 
+/**
+ * List of routes for App.
+ * For invalid route, renders hompage.
+ *
+ * State: None
+ * Props: None
+ *
+ * App -> RoutesList
+ */
 function RoutesList() {
   return (
     <Routes>
@@ -11,7 +20,7 @@ function RoutesList() {
 
       <Route path="/companies" element={<CompanyList />} />
 
-      <Route path="/companies/:name" element={<CompanyDetails />} />
+      <Route path="/companies/:handle" element={<CompanyDetail />} />
 
       <Route path="/jobs" element={<JobList />} />
 

@@ -1,9 +1,18 @@
+/**
+ * Presentational component for homepage
+ *
+ * State: None
+ * Props: None
+ *
+ * Route: "/"
+ */
+
 function Homepage() {
   return (
-    <div>
+    <div className="Homepage">
       Homepage
     </div>
-  )
+  );
 }
 
 export default Homepage;
