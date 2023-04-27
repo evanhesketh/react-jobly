@@ -45,7 +45,19 @@ class JoblyApi {
     return res.company;
   }
 
-  // obviously, you'll add a lot here ...
+  /** Get data for companies. Optional to filter by nameLike. */
+
+  static async getCompanies(nameLike) {
+    let res = await this.request("companies/", {nameLike});
+    return res.companies;
+  }
+
+  /** Get data for jobs. Optional to filter by title. */
+
+  static async getJobs(title) {
+    let res = await this.request("jobs/", {title});
+    return res.jobs;
+  }
 }
 
 export default JoblyApi;
