@@ -1,0 +1,7 @@
+.JobCard-title {
+    font-size: 1em;
+}
+
+.JobCard-salary, .JobCard-equity {
+    font-size: 0.8em;
+}

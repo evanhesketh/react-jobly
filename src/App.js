@@ -1,27 +1,28 @@
-import './App.css';
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import RoutesList from './RoutesList';
-import Navigation from './Navigation';
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import RoutesList from "./RoutesList";
+import Navigation from "./Navigation";
 
 /**
  * "Jobly" - An app for finding jobs
  *
- * State: None
- * Props: None
+ * props:
+ *  -none
+ *
+ * state:
+ *  -none
  *
  * App -> {Navigation, RoutesList}
  */
+
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
+    <BrowserRouter>
+      <div className="App">
         <Navigation />
-        <div className="container">
-          <RoutesList />
-        </div>
-      </BrowserRouter>
-    </div>
+        <RoutesList />
+      </div>
+    </BrowserRouter>
   );
 }
 

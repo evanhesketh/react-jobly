@@ -2,18 +2,29 @@ import JobCard from "./JobCard";
 
 /** Renders a list of job cards.
  *
- * State: None
+ * props:
+ *  -jobs - array like [{job}, ...]
  *
- * Props:
- * - jobs - array like [{job}, ...]
+ * state:
+ *  -none
  *
  * {JobList, CompanyDetail} -> JobCardList -> JobCard
  */
+
 function JobCardList({ jobs }) {
   return (
-    <div className="JobCardList">
-      <JobCard title="" company="" salary="" equity="" />
-      <JobCard title="" company="" salary="" equity="" />
+    <div className="JobCardList col-md-8 offset-md-2">
+      {jobs.map((job) => {
+        return (
+          <JobCard
+            key={job.id}
+            title={job.title}
+            company={job.companyName}
+            salary={job.salary}
+            equity={job.equity}
+          />
+        );
+      })}
     </div>
   );
 }

@@ -1,0 +1,8 @@
+.Homepage {
+    height: calc(100vh - 10vh);
+}
+
+.Homepage-jobly {
+    font-weight: bold;
+    font-size: 2em;
+}

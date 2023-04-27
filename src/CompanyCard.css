@@ -1,0 +1,20 @@
+.CompanyCard-body {
+    padding: 1em 1em 2em 1em;
+}
+
+.CompanyCard-name {
+    font-size: 1em;
+}
+
+.CompanyCard-description {
+    font-size: 0.8em;
+}
+
+.CompanyCard-link {
+    text-decoration: none;
+    color: black;
+}
+
+.CompanyCard-logo {
+    width: 50px;
+}
