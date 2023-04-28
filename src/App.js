@@ -32,18 +32,21 @@ function App() {
   useEffect(
     function fetchUserData() {
       async function fetchUser() {
-        let username;
-        try {
-          const tokenData = jwt_decode(token);
-          username = tokenData.username;
-        } catch (err) {
-          console.log("No token stored. Please login");
-          setCurrentUser(null);
-          return;
+        if (token) {
+          const {username} = jwt_decode(token);
+          JoblyApi.token = token;
+
+          try{
+            const user = await JoblyApi.getUserDetails(username);
+            setCurrentUser(user);
+            return;
+          } catch (err) {
+            setCurrentUser(null);
+            JoblyApi.token = null;
+            return;
+          }
         }
-        JoblyApi.token = token;
-        const user = await JoblyApi.getUserDetails(username);
-        setCurrentUser(user);
+        setCurrentUser(null);
       }
       fetchUser();
     },
@@ -74,9 +77,9 @@ function App() {
       lastName,
       email
     );
-    const user = await JoblyApi.getUserDetails(username);
+    // const user = await JoblyApi.getUserDetails(username);
     localStorage.setItem("token", token);
-    setCurrentUser(user);
+    // setCurrentUser(user);
     setToken(token);
   }
 
@@ -95,7 +98,7 @@ function App() {
     setCurrentUser({ ...user });
   }
 
-  if (!currentUser && token) return null;
+  if (!currentUser && token) return <div className="App-signinMsg">Signing in...</div>;
 
   return (
     <BrowserRouter>
