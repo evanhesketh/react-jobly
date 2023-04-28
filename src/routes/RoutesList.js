@@ -24,37 +24,41 @@ import { useContext } from "react";
  *
  * App -> RoutesList
  */
-function RoutesList({ login, signup, update}) {
+function RoutesList({ login, signup, update }) {
   const user = useContext(userContext);
 
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
 
-      <Route element={<PrivateRoutes />}>
-        <Route path="/companies" element={<CompanyList />} />
+      {user ? (
+        <>
+          <Route path="/companies" element={<CompanyList />} />
 
-        <Route path="/companies/:handle" element={<CompanyDetail />} />
+          <Route path="/companies/:handle" element={<CompanyDetail />} />
 
-        <Route path="/jobs" element={<JobList />} />
+          <Route path="/jobs" element={<JobList />} />
 
-        <Route
-          path="/profile"
-          element={
-            <ProfileForm
-              update={update}
-              username={user?.username}
-              firstName={user?.firstName}
-              lastName={user?.lastName}
-              email={user?.email}
-            />
-          }
-        />
-      </Route>
+          <Route
+            path="/profile"
+            element={
+              <ProfileForm
+                update={update}
+                username={user?.username}
+                firstName={user?.firstName}
+                lastName={user?.lastName}
+                email={user?.email}
+              />
+            }
+          />
+        </>
+      ) : (
+        <>
+          <Route path="/login" element={<LoginForm login={login} />} />
 
-      <Route path="/login" element={<LoginForm login={login} />} />
-
-      <Route path="/signup" element={<SignupForm signup={signup} />} />
+          <Route path="/signup" element={<SignupForm signup={signup} />} />
+        </>
+      )}
 
       <Route path="/*" element={<Navigate to="/" />} />
     </Routes>
