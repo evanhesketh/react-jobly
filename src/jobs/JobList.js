@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import JobCardList from "./JobCardList";
-import SearchForm from "./SearchForm";
-import JoblyApi from "./api";
+import SearchForm from "../forms/SearchForm";
+import JoblyApi from "../api";
 
 /**
  * Fetches data about jobs from API.

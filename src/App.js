@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import jwt_decode from "jwt-decode";
-import RoutesList from "./RoutesList";
-import Navigation from "./Navigation";
+import RoutesList from "./routes/RoutesList"
+// import RoutesList from "./RoutesList";
+import Navigation from "./navigation/Navigation"
+// import Navigation from "./Navigation";
 import JoblyApi from "./api";
 import userContext from "./userContext";
 
@@ -20,28 +22,33 @@ import userContext from "./userContext";
  */
 
 function App() {
-  const [token, setToken] = useState(getTokenFromLocalStorage);
+  const storedToken = getTokenFromLocalStorage();
+  const [token, setToken] = useState(storedToken);
   const [currentUser, setCurrentUser] = useState(null);
 
-  console.log("token in app", token)
+  console.log("token in app", token);
   console.log("currentUser in app ", currentUser);
 
-  useEffect(function fetchUserData() {
-    async function fetchUser() {
-      let username;
-      try {
-        const tokenData = jwt_decode(token);
-        username = tokenData.username;
-      } catch (err) {
-        console.log("No token stored. Please login");
-        return;
+  useEffect(
+    function fetchUserData() {
+      async function fetchUser() {
+        let username;
+        try {
+          const tokenData = jwt_decode(token);
+          username = tokenData.username;
+        } catch (err) {
+          console.log("No token stored. Please login");
+          setCurrentUser(null);
+          return;
+        }
+        JoblyApi.token = token;
+        const user = await JoblyApi.getUserDetails(username);
+        setCurrentUser(user);
       }
-      JoblyApi.token = token;
-      const user = await JoblyApi.getUserDetails(username);
-      setCurrentUser(user);
-    }
-    fetchUser();
-  }, [token]);
+      fetchUser();
+    },
+    [token]
+  );
 
   /** Get token from local storage. Returns token or null. */
 
@@ -54,9 +61,7 @@ function App() {
 
   async function login({ username, password }) {
     const token = await JoblyApi.getToken(username, password);
-    const user = await JoblyApi.getUserDetails(username);
     localStorage.setItem("token", token);
-    setCurrentUser(user);
     setToken(token);
   }
   /** Signs up a new user. */
@@ -81,14 +86,16 @@ function App() {
     localStorage.removeItem("token");
     JoblyApi.token = null;
     setToken(null);
-    setCurrentUser(null);
   }
+
   /** Updates a logged in user's profile information. */
 
-  async function update({username, firstName, lastName, email}) {
+  async function update({ username, firstName, lastName, email }) {
     const user = await JoblyApi.update(username, firstName, lastName, email);
     setCurrentUser({ ...user });
   }
+
+  if (!currentUser && token) return null;
 
   return (
     <BrowserRouter>

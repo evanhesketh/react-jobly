@@ -20,7 +20,6 @@ const INITIAL_FORM_DATA = {
  * state:
  *  -formData - object like {username: "user", password: "password", ..., errors: null}
  *
- *
  * {RoutesList} -> SignupForm
  */
 
@@ -48,11 +47,12 @@ function SignupForm({ signup }) {
       setFormData({...formData, errors: err });
     }
   }
-  //TODO: refactor error display
+
   return (
     <div className="SignupForm col-md-4 offset-md-4">
       <h3>Signup</h3>
-      {formData.errors && <Alert errors={formData.errors}/>}
+      {formData.errors &&
+      formData.errors.map((error, idx) => <Alert key={idx} error={error}/>)}
       <form className="SignupForm-form " onSubmit={handleSubmit}>
         <label htmlFor="SignupForm-username">Username</label>
         <input

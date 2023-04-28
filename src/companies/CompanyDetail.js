@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import JobCardList from "./JobCardList";
+import JobCardList from "../jobs/JobCardList";
 import { useParams, Navigate } from "react-router-dom";
-import JoblyApi from "./api";
+import JoblyApi from "../api";
 
 /**
  * Fetches data on a specific company from API.

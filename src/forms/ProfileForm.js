@@ -1,6 +1,6 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import userContext from "./userContext";
+import Alert from "./Alert";
 
 /**
  * Form for updating a user's profile information.
@@ -15,18 +15,13 @@ import userContext from "./userContext";
  * state:
  *  -formData - object like {username: "user", firstName: "Test", ..., errors: null}
  *
- *
  * {RoutesList} -> ProfileForm
  */
 
-//TODO: resolve issue regarding user state being null on first render
-function ProfileForm({ update }) {
+function ProfileForm({ update, username, firstName, lastName, email }) {
   const navigate = useNavigate();
-  const user = useContext(userContext);
-  const [formData, setFormData] = useState({ username: user.username });
+  const [formData, setFormData] = useState({ username, firstName, lastName, email, errors: null});
 
-  console.log("formData in ProfileForm ", formData);
-  console.log("username ", username)
 
   /** Update form input. */
   function handleChange(evt) {
@@ -51,6 +46,8 @@ function ProfileForm({ update }) {
   return (
     <div className="ProfileForm col-md-4 offset-md-4">
       <h3>Update</h3>
+      {formData.errors &&
+      formData.errors.map((error, idx) => <Alert key={idx} error={error}/>)}
       <form className="ProfileForm-form " onSubmit={handleSubmit}>
         <label htmlFor="ProfileForm-username">Username</label>
         <input

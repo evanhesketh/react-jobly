@@ -11,7 +11,6 @@ import Alert from "./Alert";
  * state:
  *  -formData - object like {username: "user", password: "password", errors: null}
  *
- *
  * {RoutesList} -> LoginForm
  */
 
@@ -45,7 +44,8 @@ function LoginForm({ login }) {
   return (
     <div className="LoginForm col-md-4 offset-md-4">
       <h3>Login</h3>
-      {formData.errors && <Alert errors={formData.errors}/>}
+      {formData.errors &&
+      formData.errors.map((error, idx) => <Alert key={idx} error={error}/>)}
       <form className="LoginForm-form " onSubmit={handleSubmit}>
         <label htmlFor="LoginForm-username">Username</label>
         <input

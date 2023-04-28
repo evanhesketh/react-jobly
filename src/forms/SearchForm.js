@@ -9,7 +9,6 @@ import { useState } from "react";
  * state:
  *  -formData - object like {term: "officer"}
  *
- *
  * {JobList, CompanyList} -> SearchForm
  */
 
