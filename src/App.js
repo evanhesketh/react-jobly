@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import RoutesList from "./routes/RoutesList";
 import Navigation from "./navigation/Navigation";
@@ -23,6 +23,7 @@ function App() {
   const storedToken = getTokenFromLocalStorage();
   const [token, setToken] = useState(storedToken);
   const [currentUser, setCurrentUser] = useState(null);
+  const navigate = useNavigate();
 
   console.log("token in app", token);
   console.log("currentUser in app ", currentUser);
@@ -85,20 +86,30 @@ function App() {
     localStorage.removeItem("token");
     JoblyApi.token = null;
     setToken(null);
+    navigate("/");
   }
 
   /** Updates a logged in user's profile information. */
 
-  async function update({ username, firstName, lastName, email }) {
+  async function updateUserInfo({ username, firstName, lastName, email }) {
     const user = await JoblyApi.update(username, firstName, lastName, email);
     setCurrentUser({ ...user });
+  }
+
+  /** Updates user's applications to reflect applying to a job */
+
+  async function apply(username, jobId) {
+    await JoblyApi.apply(username, jobId);
+    setCurrentUser({
+      ...currentUser,
+      applications: [...currentUser.applications, jobId],
+    });
   }
 
   if (!currentUser && token)
     return <div className="App-signinMsg">Signing in...</div>;
 
   return (
-    <BrowserRouter>
       <div className="App">
         <userContext.Provider
           value={{
@@ -110,12 +121,13 @@ function App() {
           <RoutesList
             login={login}
             signup={signup}
-            update={update}
+            updateUserInfo={updateUserInfo}
+            apply={apply}
+            appliedJobIds={new Set(currentUser?.applications)}
             currentUser={currentUser}
           />
         </userContext.Provider>
       </div>
-    </BrowserRouter>
   );
 }
 

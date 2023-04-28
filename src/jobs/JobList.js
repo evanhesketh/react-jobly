@@ -8,7 +8,8 @@ import JoblyApi from "../api";
  * Displays list of jobs with search box.
  *
  * props:
- *  -none
+ *  -apply - function to be called in parent when applying for a job
+ *  -appliedJobIds - set of job ids like {1, 2, 3, ...}
  *
  * state:
  *  -jobsApiData - array like [{job}, ...]
@@ -24,7 +25,7 @@ import JoblyApi from "../api";
  * RoutesList -> JobList -> {SearchForm, JobCardList}
  */
 
-function JobList() {
+function JobList({apply, appliedJobIds}) {
   const [jobsApiData, setJobsApiData] = useState({
     data: null,
     isLoading: true,
@@ -67,7 +68,7 @@ function JobList() {
       </div>
       <div className="JobList-jobcard-list">
         {jobsApiData.data.length > 0 ? (
-          <JobCardList jobs={jobsApiData.data} />
+          <JobCardList jobs={jobsApiData.data} apply={apply} appliedJobIds={appliedJobIds}/>
         ) : (
           <p>Your search did not return any results.</p>
         )}

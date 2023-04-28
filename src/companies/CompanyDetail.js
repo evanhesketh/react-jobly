@@ -8,7 +8,8 @@ import JoblyApi from "../api";
  * Displays basic company information and list of jobs.
  *
  * props:
- *  -none
+ *  -apply - function to call in parent when user applies for a job
+ *  -appliedJobIds - set of job ids like {1, 2, 3, ...}
  *
  * state:
  *  -company - {
@@ -25,7 +26,7 @@ import JoblyApi from "../api";
  * RoutesList -> CompanyDetail -> JobCardList -> JobCard
  */
 
-function CompanyDetail() {
+function CompanyDetail({apply, appliedJobIds}) {
   const [company, setCompany] = useState({
     data: null,
     isLoading: true,
@@ -60,7 +61,7 @@ function CompanyDetail() {
         <h4>{company.data.name}</h4>
         <p>{company.data.description}</p>
       </div>
-      <JobCardList jobs={company.data.jobs} />
+      <JobCardList jobs={company.data.jobs} apply={apply} appliedJobIds={appliedJobIds}/>
     </div>
   );
 }

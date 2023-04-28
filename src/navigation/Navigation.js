@@ -63,7 +63,7 @@ function Navigation({ logout }) {
               </NavLink>
             </li>
             <li className="nav-item me-4">
-              <Link className="nav-link" to="/" onClick={logout}>
+              <Link className="nav-link" onClick={logout}>
                 Logout {username}
               </Link>
             </li>

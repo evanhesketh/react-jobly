@@ -6,7 +6,7 @@ import Alert from "./Alert";
  * Form for updating a user's profile information.
  *
  * props:
- *  -update - function to be called in parent on form submission
+ *  -updateUserInfo - function to be called in parent on form submission
  *  -username - string like "user"
  *  -firstName - string like "Test"
  *  -lastName - string like "Tester"
@@ -18,7 +18,7 @@ import Alert from "./Alert";
  * {RoutesList} -> ProfileForm
  */
 
-function ProfileForm({ update, username, firstName, lastName, email }) {
+function ProfileForm({ updateUserInfo, username, firstName, lastName, email }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username,
@@ -41,7 +41,7 @@ function ProfileForm({ update, username, firstName, lastName, email }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
-      await update(formData);
+      await updateUserInfo(formData);
       navigate("/");
     } catch (err) {
       setFormData({ ...formData, errors: err });

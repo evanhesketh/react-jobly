@@ -6,7 +6,6 @@ import JobList from "../jobs/JobList";
 import LoginForm from "../forms/LoginForm";
 import SignupForm from "../forms/SignupForm";
 import ProfileForm from "../forms/ProfileForm";
-import PrivateRoutes from "./PrivateRoutes";
 import userContext from "../userContext";
 import { useContext } from "react";
 
@@ -17,14 +16,18 @@ import { useContext } from "react";
  * props:
  *  -login - function to be called when a user logs in
  *  -register - function to be called when a user registers
- *  -update - function to be called when a logged in user updates profile
+ *  -updateUserInfo - function to be called when a logged in user updates profile
+ *  -apply - function to be called when a user applies for a job
+ *  -appliedJobIds - set of job ids like {1, 2, 3}
+ *  -currentUser - object containing all user data
+ *    like {username: "test", firstName: "tester", ...}
  *
  * state:
  *  -none
  *
  * App -> RoutesList
  */
-function RoutesList({ login, signup, update, currentUser }) {
+function RoutesList({ login, signup, updateUserInfo, apply, appliedJobIds, currentUser }) {
   const {username, firstName} = useContext(userContext);
 
   return (
@@ -35,15 +38,15 @@ function RoutesList({ login, signup, update, currentUser }) {
         <>
           <Route path="/companies" element={<CompanyList />} />
 
-          <Route path="/companies/:handle" element={<CompanyDetail />} />
+          <Route path="/companies/:handle" element={<CompanyDetail apply={apply} appliedJobIds={appliedJobIds}/>} />
 
-          <Route path="/jobs" element={<JobList />} />
+          <Route path="/jobs" element={<JobList apply={apply} appliedJobIds={appliedJobIds}/>} />
 
           <Route
             path="/profile"
             element={
               <ProfileForm
-                update={update}
+                updateUserInfo={updateUserInfo}
                 username={username}
                 firstName={firstName}
                 lastName={currentUser?.lastName}
