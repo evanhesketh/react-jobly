@@ -32,6 +32,8 @@ function CompanyList() {
   });
   const [searchTerm, setSearchTerm] = useState(null);
 
+  console.log("companiesApiData", companiesApiData);
+
   useEffect(
     function fetchCompaniesData() {
       async function fetchCompanies() {
@@ -50,16 +52,21 @@ function CompanyList() {
     [searchTerm]
   );
 
-  /** Called on search submission to update nameLike state */
+  /** Called on search submission to update companiesApiData
+   *  with data filtered by search term
+   * */
 
   async function getFilteredCompanies(formData) {
+    if (formData === searchTerm) return;
+
     setCompaniesApiData({ data: null, isLoading: true });
     setSearchTerm(formData);
   }
 
-  if (companiesApiData.isLoading) return <div>Loading...</div>;
+  if (companiesApiData.isLoading) return <div className="loading-spinner">Loading...</div>;
+
   return (
-    <div className="CompanyList pt-5">
+    <div className="CompanyList pt-5 pb-3">
       <div className="CompanyList-search mb-4 offset-md-2">
         <SearchForm handleSearchSubmit={getFilteredCompanies} />
       </div>

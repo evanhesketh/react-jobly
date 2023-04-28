@@ -1,7 +1,6 @@
 @import '~bootstrap/dist/css/bootstrap.css';
 
 body {
-  padding-bottom: 30px;
   background-color: lightblue;
   height: 100vh;
 }

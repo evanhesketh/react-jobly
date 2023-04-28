@@ -35,17 +35,20 @@ function CompanyDetail() {
 
   console.log("CompanyDetail ran ", company);
 
-  useEffect(function fetchCompanyWhenMounted() {
-    async function fetchCompany() {
-      try {
-        const companyData = await JoblyApi.getCompany(handle);
-        setCompany({ data: companyData, isLoading: false, errors: null });
-      } catch (err) {
-        setCompany({ data: null, isLoading: false, errors: err });
+  useEffect(
+    function fetchCompanyWhenMounted() {
+      async function fetchCompany() {
+        try {
+          const companyData = await JoblyApi.getCompany(handle);
+          setCompany({ data: companyData, isLoading: false, errors: null });
+        } catch (err) {
+          setCompany({ data: null, isLoading: false, errors: err });
+        }
       }
-    }
-    fetchCompany();
-  }, [handle]);
+      fetchCompany();
+    },
+    [handle]
+  );
 
   if (company.isLoading) return <div>Loading...</div>;
 
@@ -53,8 +56,10 @@ function CompanyDetail() {
 
   return (
     <div className="CompanyDetail pt-5">
-      <h4>{company.data.name}</h4>
-      <p>{company.data.description}</p>
+      <div className="CompanyDetail-header col-md-8 offset-md-2">
+        <h4>{company.data.name}</h4>
+        <p>{company.data.description}</p>
+      </div>
       <JobCardList jobs={company.data.jobs} />
     </div>
   );

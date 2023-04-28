@@ -52,6 +52,8 @@ function JobList() {
   /** Called on search submission to update title state. */
 
   async function getFilteredJobs(formData) {
+    if (formData === searchTerm) return;
+
     setJobsApiData({ data: null, isLoading: true });
     setSearchTerm(formData);
   }
