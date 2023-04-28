@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import RoutesList from "./routes/RoutesList"
-// import RoutesList from "./RoutesList";
 import Navigation from "./navigation/Navigation"
-// import Navigation from "./Navigation";
 import JoblyApi from "./api";
 import userContext from "./userContext";
 
@@ -77,9 +75,7 @@ function App() {
       lastName,
       email
     );
-    // const user = await JoblyApi.getUserDetails(username);
     localStorage.setItem("token", token);
-    // setCurrentUser(user);
     setToken(token);
   }
 
