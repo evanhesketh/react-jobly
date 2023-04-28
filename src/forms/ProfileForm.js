@@ -20,8 +20,13 @@ import Alert from "./Alert";
 
 function ProfileForm({ update, username, firstName, lastName, email }) {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ username, firstName, lastName, email, errors: null});
-
+  const [formData, setFormData] = useState({
+    username,
+    firstName,
+    lastName,
+    email,
+    errors: null,
+  });
 
   /** Update form input. */
   function handleChange(evt) {
@@ -36,10 +41,10 @@ function ProfileForm({ update, username, firstName, lastName, email }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
-      await update (formData);
+      await update(formData);
       navigate("/");
     } catch (err) {
-      setFormData({...formData, errors: err });
+      setFormData({ ...formData, errors: err });
     }
   }
 
@@ -47,7 +52,7 @@ function ProfileForm({ update, username, firstName, lastName, email }) {
     <div className="ProfileForm col-md-4 offset-md-4">
       <h3>Update</h3>
       {formData.errors &&
-      formData.errors.map((error, idx) => <Alert key={idx} error={error}/>)}
+        formData.errors.map((error, idx) => <Alert key={idx} error={error} type="alert-danger"/>)}
       <form className="ProfileForm-form " onSubmit={handleSubmit}>
         <label htmlFor="ProfileForm-username">Username</label>
         <input

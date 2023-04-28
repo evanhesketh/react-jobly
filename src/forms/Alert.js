@@ -9,10 +9,10 @@
  *
  * {LoginForm, SignupForm} -> Alert
  */
-
-function Alert({error}) {
+//TODO: prop for type of error
+function Alert({error, type}) {
   return (
-    <div className="Alert alert alert-danger role='alert'">
+    <div className={`Alert alert ${type} role=alert`}>
       <div className="Alert-msg">{error}</div>
     </div>
   );

@@ -45,7 +45,7 @@ function LoginForm({ login }) {
     <div className="LoginForm col-md-4 offset-md-4">
       <h3>Login</h3>
       {formData.errors &&
-      formData.errors.map((error, idx) => <Alert key={idx} error={error}/>)}
+      formData.errors.map((error, idx) => <Alert key={idx} error={error} type="alert-danger"/>)}
       <form className="LoginForm-form " onSubmit={handleSubmit}>
         <label htmlFor="LoginForm-username">Username</label>
         <input

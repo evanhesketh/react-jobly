@@ -52,7 +52,7 @@ function SignupForm({ signup }) {
     <div className="SignupForm col-md-4 offset-md-4">
       <h3>Signup</h3>
       {formData.errors &&
-      formData.errors.map((error, idx) => <Alert key={idx} error={error}/>)}
+      formData.errors.map((error, idx) => <Alert key={idx} error={error} type="alert-danger"/>)}
       <form className="SignupForm-form " onSubmit={handleSubmit}>
         <label htmlFor="SignupForm-username">Username</label>
         <input
