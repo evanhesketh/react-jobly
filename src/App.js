@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import jwt_decode from "jwt-decode";
-import RoutesList from "./routes/RoutesList"
-import Navigation from "./navigation/Navigation"
+import RoutesList from "./routes/RoutesList";
+import Navigation from "./navigation/Navigation";
 import JoblyApi from "./api";
 import userContext from "./userContext";
 
@@ -31,10 +31,10 @@ function App() {
     function fetchUserData() {
       async function fetchUser() {
         if (token) {
-          const {username} = jwt_decode(token);
+          const { username } = jwt_decode(token);
           JoblyApi.token = token;
 
-          try{
+          try {
             const user = await JoblyApi.getUserDetails(username);
             setCurrentUser(user);
             return;
@@ -94,14 +94,25 @@ function App() {
     setCurrentUser({ ...user });
   }
 
-  if (!currentUser && token) return <div className="App-signinMsg">Signing in...</div>;
+  if (!currentUser && token)
+    return <div className="App-signinMsg">Signing in...</div>;
 
   return (
     <BrowserRouter>
       <div className="App">
-        <userContext.Provider value={currentUser}>
+        <userContext.Provider
+          value={{
+            username: currentUser?.username,
+            firstName: currentUser?.firstName,
+          }}
+        >
           <Navigation logout={logout} />
-          <RoutesList login={login} signup={signup} update={update} />
+          <RoutesList
+            login={login}
+            signup={signup}
+            update={update}
+            currentUser={currentUser}
+          />
         </userContext.Provider>
       </div>
     </BrowserRouter>

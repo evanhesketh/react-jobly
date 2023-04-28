@@ -23,7 +23,7 @@ import userContext from "../userContext";
  * App -> Navigation
  */
 function Navigation({ logout }) {
-  const user = useContext(userContext);
+  const {username} = useContext(userContext);
 
   return (
     <nav className="Navigation navbar navbar-expand-md">
@@ -31,7 +31,7 @@ function Navigation({ logout }) {
         <NavLink className="navbar-brand" to="/">
           Jobly
         </NavLink>
-        {!user && (
+        {!username && (
           <ul className="navbar-nav ms-auto">
             <li className="nav-item me-4">
               <NavLink className="nav-link" to="/login">
@@ -45,7 +45,7 @@ function Navigation({ logout }) {
             </li>
           </ul>
         )}
-        {user && (
+        {username && (
           <ul className="navbar-nav ms-auto">
             <li className="nav-item me-4">
               <NavLink className="nav-link" to="/profile">
@@ -64,7 +64,7 @@ function Navigation({ logout }) {
             </li>
             <li className="nav-item me-4">
               <Link className="nav-link" to="/" onClick={logout}>
-                Logout {user.username}
+                Logout {username}
               </Link>
             </li>
           </ul>

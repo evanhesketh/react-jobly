@@ -24,14 +24,14 @@ import { useContext } from "react";
  *
  * App -> RoutesList
  */
-function RoutesList({ login, signup, update }) {
-  const user = useContext(userContext);
+function RoutesList({ login, signup, update, currentUser }) {
+  const {username, firstName} = useContext(userContext);
 
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
 
-      {user ? (
+      {username ? (
         <>
           <Route path="/companies" element={<CompanyList />} />
 
@@ -44,10 +44,10 @@ function RoutesList({ login, signup, update }) {
             element={
               <ProfileForm
                 update={update}
-                username={user?.username}
-                firstName={user?.firstName}
-                lastName={user?.lastName}
-                email={user?.email}
+                username={username}
+                firstName={firstName}
+                lastName={currentUser?.lastName}
+                email={currentUser?.email}
               />
             }
           />

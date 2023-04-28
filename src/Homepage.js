@@ -18,7 +18,7 @@ import "./Homepage.css";
  */
 
 function Homepage() {
-  const user = useContext(userContext);
+  const {firstName} = useContext(userContext);
 
   return (
     <div className="Homepage d-flex flex-column align-items-center justify-content-center">
@@ -26,7 +26,7 @@ function Homepage() {
       <div className="Homepage-slogan">
         All the jobs in one, convenient place.
       </div>
-      {!user && (
+      {!firstName && (
         <div className="Homepage-btns">
           <Link to="/login">
             {" "}
@@ -41,8 +41,8 @@ function Homepage() {
           </Link>
         </div>
       )}
-      {user && (
-        <div className="Homepage-welcome">Welcome back, {user.firstName}</div>
+      {firstName && (
+        <div className="Homepage-welcome">Welcome back, {firstName}</div>
       )}
     </div>
   );
