@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
-import './ProfileForm.css';
+import './form.css';
 
 /**
  * Form for updating a user's profile information.

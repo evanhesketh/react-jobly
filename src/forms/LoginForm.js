@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
+import './form.css';
 
 /**
  * Form for logging in a user.
@@ -66,7 +67,7 @@ function LoginForm({ login }) {
           aria-label="Password"
           type="password"
         />
-        <button className="SearchForm-submitBtn btn btn-primary">Submit</button>
+        <button className="LoginForm-submitBtn btn btn-primary">Submit</button>
       </form>
     </div>
   );

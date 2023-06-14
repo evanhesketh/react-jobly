@@ -107,7 +107,7 @@ function App() {
   }
 
   if (!currentUser && token)
-    return <div className="App-signinMsg">Signing in...</div>;
+    return <div className="loading-spinner">Signing in...</div>;
 
   return (
       <div className="App">

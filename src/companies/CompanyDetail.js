@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import JobCardList from "../jobs/JobCardList";
 import { useParams, Navigate } from "react-router-dom";
 import JoblyApi from "../api";
+import "./CompanyDetail.css";
 
 /**
  * Fetches data on a specific company from API.
@@ -26,7 +27,7 @@ import JoblyApi from "../api";
  * RoutesList -> CompanyDetail -> JobCardList -> JobCard
  */
 
-function CompanyDetail({apply, appliedJobIds}) {
+function CompanyDetail({ apply, appliedJobIds }) {
   const [company, setCompany] = useState({
     data: null,
     isLoading: true,
@@ -51,17 +52,23 @@ function CompanyDetail({apply, appliedJobIds}) {
     [handle]
   );
 
-  if (company.isLoading) return <div>Loading...</div>;
+  if (company.isLoading) {
+    return <div className="loading-spinner">Loading...</div>;
+  }
 
   if (company.errors) return <Navigate to="/" />;
 
   return (
     <div className="CompanyDetail pt-5">
       <div className="CompanyDetail-header col-md-8 offset-md-2">
-        <h4>{company.data.name}</h4>
-        <p>{company.data.description}</p>
+        <h4 className="CompanyDetail-name">{company.data.name}</h4>
+        <p className="CompanyDetail-description">{company.data.description}</p>
       </div>
-      <JobCardList jobs={company.data.jobs} apply={apply} appliedJobIds={appliedJobIds}/>
+      <JobCardList
+        jobs={company.data.jobs}
+        apply={apply}
+        appliedJobIds={appliedJobIds}
+      />
     </div>
   );
 }

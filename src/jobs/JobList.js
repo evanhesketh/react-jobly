@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import JobCardList from "./JobCardList";
 import SearchForm from "../forms/SearchForm";
 import JoblyApi from "../api";
-import './JobList.css';
+import "./JobList.css";
 
 /**
  * Fetches data about jobs from API.
@@ -26,7 +26,7 @@ import './JobList.css';
  * RoutesList -> JobList -> {SearchForm, JobCardList}
  */
 
-function JobList({apply, appliedJobIds}) {
+function JobList({ apply, appliedJobIds }) {
   const [jobsApiData, setJobsApiData] = useState({
     data: null,
     isLoading: true,
@@ -51,7 +51,7 @@ function JobList({apply, appliedJobIds}) {
     [searchTerm]
   );
 
-  /** Called on search submission to update title state. */
+  /** Called on search submission */
 
   async function getFilteredJobs(formData) {
     if (formData === searchTerm) return;
@@ -60,7 +60,9 @@ function JobList({apply, appliedJobIds}) {
     setSearchTerm(formData);
   }
 
-  if (jobsApiData.isLoading) return <div>Loading...</div>;
+  if (jobsApiData.isLoading) {
+    return <div className="loading-spinner">Loading...</div>;
+  }
 
   return (
     <div className="JobList pt-5">
@@ -69,9 +71,15 @@ function JobList({apply, appliedJobIds}) {
       </div>
       <div className="JobList-jobcard-list">
         {jobsApiData.data.length > 0 ? (
-          <JobCardList jobs={jobsApiData.data} apply={apply} appliedJobIds={appliedJobIds}/>
+          <JobCardList
+            jobs={jobsApiData.data}
+            apply={apply}
+            appliedJobIds={appliedJobIds}
+          />
         ) : (
-          <p className="JobList-no-results">Your search did not return any results.</p>
+          <p className="JobList-no-results">
+            Your search did not return any results.
+          </p>
         )}
       </div>
     </div>

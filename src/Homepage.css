@@ -19,6 +19,7 @@
     text-shadow: 2px 2px 4px #000000;
 }
 
-button {
+.Homepage-loginBtn, .Homepage-signupBtn {
     margin: 0.8em;
 }
+

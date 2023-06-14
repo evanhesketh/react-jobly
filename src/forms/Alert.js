@@ -9,7 +9,6 @@
  *
  * {LoginForm, SignupForm} -> Alert
  */
-//TODO: prop for type of error
 function Alert({error, type}) {
   return (
     <div className={`Alert alert ${type} role=alert`}>

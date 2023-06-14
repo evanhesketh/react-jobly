@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
+import './form.css';
 
 const INITIAL_FORM_DATA = {
   username: "",
@@ -100,7 +101,7 @@ function SignupForm({ signup }) {
           value={formData.email}
           aria-label="Email"
         />
-        <button className="SearchForm-submitBtn btn btn-primary">Submit</button>
+        <button className="SignupForm-submitBtn btn btn-primary">Submit</button>
       </form>
     </div>
   );

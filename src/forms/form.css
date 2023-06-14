@@ -1,0 +1,13 @@
+.ProfileForm, .LoginForm, .SignupForm {
+    color: white;
+
+}
+
+.ProfileForm-submitBtn, .LoginForm-submitBtn, .SignupForm-submitBtn {
+    margin-top: 0.8em;
+}
+
+
+
+
+
