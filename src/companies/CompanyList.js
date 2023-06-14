@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import CompanyCard from "./CompanyCard";
 import SearchForm from "../forms/SearchForm";
 import JoblyApi from "../api";
+import './CompanyList.css';
 
 /**
  * Fetches data about companies from API.
@@ -84,7 +85,7 @@ function CompanyList() {
             );
           })
         ) : (
-          <p>Your search did not return any results.</p>
+          <p className="CompanyList-no-results">Your search did not return any results.</p>
         )}
       </div>
     </div>

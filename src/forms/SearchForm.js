@@ -30,7 +30,7 @@ function SearchForm({ handleSearchSubmit }) {
 
   return (
     <div className="SearchForm row">
-      <form className="SearchForm-form col-6 d-flex" onSubmit={handleSubmit}>
+      <form className="SearchForm-form col-6 offset-2 d-flex" onSubmit={handleSubmit}>
         <label htmlFor="SearchForm-input" />
         <input
           className="form-control"

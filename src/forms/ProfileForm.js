@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
+import './ProfileForm.css';
 
 /**
  * Form for updating a user's profile information.
@@ -50,7 +51,7 @@ function ProfileForm({ updateUserInfo, username, firstName, lastName, email }) {
 
   return (
     <div className="ProfileForm col-md-4 offset-md-4">
-      <h3>Update</h3>
+      <h3 className="ProfileForm-title">Update</h3>
       {formData.errors &&
         formData.errors.map((error, idx) => <Alert key={idx} error={error} type="alert-danger"/>)}
       <form className="ProfileForm-form " onSubmit={handleSubmit}>
@@ -90,7 +91,7 @@ function ProfileForm({ updateUserInfo, username, firstName, lastName, email }) {
           value={formData.email}
           aria-label="Email"
         />
-        <button className="SearchForm-submitBtn btn btn-primary">Submit</button>
+        <button className="ProfileForm-submitBtn btn btn-primary">Submit</button>
       </form>
     </div>
   );

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import JobCardList from "./JobCardList";
 import SearchForm from "../forms/SearchForm";
 import JoblyApi from "../api";
+import './JobList.css';
 
 /**
  * Fetches data about jobs from API.
@@ -70,7 +71,7 @@ function JobList({apply, appliedJobIds}) {
         {jobsApiData.data.length > 0 ? (
           <JobCardList jobs={jobsApiData.data} apply={apply} appliedJobIds={appliedJobIds}/>
         ) : (
-          <p>Your search did not return any results.</p>
+          <p className="JobList-no-results">Your search did not return any results.</p>
         )}
       </div>
     </div>
