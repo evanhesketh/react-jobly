@@ -45,6 +45,11 @@ function LoginForm({ login }) {
   return (
     <div className="LoginForm col-md-4 offset-md-4">
       <h3>Login</h3>
+      <p>
+        <strong>Demo Access:</strong><br></br>
+        username: guest <br></br>
+        password: guestpw 
+      </p>
       {formData.errors &&
       formData.errors.map((error, idx) => <Alert key={idx} error={error} type="alert-danger"/>)}
       <form className="LoginForm-form " onSubmit={handleSubmit}>
